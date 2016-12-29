@@ -35,14 +35,13 @@
     return nil;
 }
 
-#pragma mark - 确保使用者自定义的状态栏属性能挺过父子控制器正确传递
-- (UIViewController *)childViewControllerForStatusBarStyle {
-    return self.topViewController;
-}
-
 - (NSArray<UIViewController *> *)popToRootViewControllerAnimated:(BOOL)animated {
     [self.pa_navigationController popToRootViewControllerAnimated:YES];
     return nil;
+}
+#pragma mark - 确保使用者自定义的状态栏属性能挺过父子控制器正确传递
+- (UIViewController *)childViewControllerForStatusBarStyle {
+    return self.topViewController;
 }
 
 @end

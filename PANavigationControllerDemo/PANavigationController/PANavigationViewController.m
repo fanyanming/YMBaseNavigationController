@@ -84,6 +84,7 @@
     // 确保每个控制器独立的导航栏,我们把传进来的导航栏,额外包装一个导航控制器:PAWrapperNavigationController
 
     PAWrapperNavigationController *wrapperNaviVC = [[PAWrapperNavigationController alloc] init];
+    // 此处默认是不透明的,方便设置背景色
     wrapperNaviVC.navigationBar.translucent = NO;
     [wrapperNaviVC.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:(UIBarMetricsDefault)];
     
@@ -106,6 +107,8 @@
                 BOOL isHideToPlay = [[_viewControllersIsHideBottomlineDictionary objectForKey:stringKey] boolValue];
                 if (isHideToPlay) {
                     [wrapperNaviVC.navigationBar setShadowImage:[[UIImage alloc] init]];
+                }else {
+                    [wrapperNaviVC.navigationBar setShadowImage:nil];
                 }
             }
         }
@@ -116,6 +119,7 @@
     if (self.barTintColor) {
         [wrapperNaviVC.navigationBar setBarTintColor:self.barTintColor];
     }
+    
     if (_customBarTintColorDictionary.count) {
         NSInteger indexToDisplay = self.viewControllers.count;
         UIColor *barTintColorToDisplay = [_customBarTintColorDictionary objectForKey:[NSNumber numberWithInteger:indexToDisplay]];
@@ -135,6 +139,9 @@
                 if ([barTintColorToDisplay isEqual:[UIColor clearColor]]) {
                     [wrapperNaviVC.navigationBar setShadowImage:[[UIImage alloc] init]];
                     wrapperNaviVC.navigationBar.translucent = YES;
+                }else {
+                    [wrapperNaviVC.navigationBar setShadowImage:nil];
+                    wrapperNaviVC.navigationBar.translucent = NO;
                 }
                 [wrapperNaviVC.navigationBar setBarTintColor:barTintColorToDisplay ? barTintColorToDisplay : _barTintColor];
                 
@@ -250,6 +257,7 @@
 - (UIView *)backArrwoViewWithColor:(UIColor *)color {
     
     UIView *backArrowView = [[UIView alloc] initWithFrame:CGRectMake(0, 12, 12, 20)];
+    backArrowView.userInteractionEnabled = NO;
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:CGPointMake(9.79, 0)];
     [path addLineToPoint:CGPointMake(0, 9.8)];
