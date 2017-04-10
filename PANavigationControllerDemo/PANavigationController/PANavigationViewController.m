@@ -19,21 +19,21 @@
 
 // navigation bar setting about
 @property (nonatomic, copy) NSDictionary<NSString *,id> *textTitleAttributes;
-@property (nonatomic, copy) NSMutableDictionary *customTextTitleAttributesDictionary;
-@property (nonatomic, copy) NSMutableDictionary *viewControllersTextTitleAttributesDictionary;
+@property (nonatomic, strong) NSMutableDictionary *customTextTitleAttributesDictionary;
+@property (nonatomic, strong) NSMutableDictionary *viewControllersTextTitleAttributesDictionary;
 
 
 @property (nonatomic, strong) UIColor *barTintColor;
-@property (nonatomic, copy) NSMutableDictionary *customBarTintColorDictionary;
-@property (nonatomic, copy) NSMutableDictionary *viewControllersBarTintColorDictionary;
+@property (nonatomic, strong) NSMutableDictionary *customBarTintColorDictionary;
+@property (nonatomic, strong) NSMutableDictionary *viewControllersBarTintColorDictionary;
 
 @property (nonatomic, strong) UIColor *tintColor;
-@property (nonatomic, copy) NSMutableDictionary *customTintColorDictionary;
-@property (nonatomic, copy) NSMutableDictionary *viewControllersTintColorDictionary;
+@property (nonatomic, strong) NSMutableDictionary *customTintColorDictionary;
+@property (nonatomic, strong) NSMutableDictionary *viewControllersTintColorDictionary;
 
 @property (nonatomic, assign) BOOL isHideBottomLine;
-@property (nonatomic, copy) NSMutableDictionary *customIsHideBottomlineDictionary;
-@property (nonatomic, copy) NSMutableDictionary *viewControllersIsHideBottomlineDictionary;
+@property (nonatomic, strong) NSMutableDictionary *customIsHideBottomlineDictionary;
+@property (nonatomic, strong) NSMutableDictionary *viewControllersIsHideBottomlineDictionary;
 
 @end
 
@@ -85,6 +85,7 @@
 
     PAWrapperNavigationController *wrapperNaviVC = [[PAWrapperNavigationController alloc] init];
     // 此处默认是不透明的,方便设置背景色
+
     wrapperNaviVC.navigationBar.translucent = NO;
     [wrapperNaviVC.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:(UIBarMetricsDefault)];
     
@@ -218,10 +219,9 @@
     wrapperVC.tabBarItem = viewController.tabBarItem;
     
     wrapperVC.hidesBottomBarWhenPushed = viewController.hidesBottomBarWhenPushed;
-    // 因为每个控制都其实wrapperNavigationContoller的rootVC,所以,返回按钮都市不显示的
-    
     [super pushViewController:wrapperVC animated:YES];
-
+    
+    // 因为每个控制都其实wrapperNavigationContoller的rootVC,所以,返回按钮都市不显示的
 #pragma mark - 为非根控制器添加返回按钮
     if (self.viewControllers.count > 1) {
         UIButton *backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
