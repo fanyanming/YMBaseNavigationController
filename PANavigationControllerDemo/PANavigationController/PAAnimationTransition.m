@@ -36,6 +36,7 @@
 
 - (void)handleGesture:(UIPanGestureRecognizer *)gestureRecognizer {
     CGPoint translation = [gestureRecognizer translationInView:gestureRecognizer.view.superview];
+    CGRect screenBounds = [UIScreen mainScreen].bounds;
     
     switch (gestureRecognizer.state) {
             
@@ -47,7 +48,7 @@
             
         case UIGestureRecognizerStateChanged: {
             // Calculate the percentage of guesture
-            CGFloat progress = translation.x / 375.0;
+            CGFloat progress = translation.x / screenBounds.size.width;
             
             // Limit it between 0 and 1
             progress = fminf(fmaxf(progress, 0.0), 1.0);

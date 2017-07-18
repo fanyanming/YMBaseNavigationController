@@ -18,11 +18,14 @@
 - (void)pa_setBarTintColor:(UIColor *)color;
 /** set barTint color in different index level,default effect all */
 - (void)pa_setBarTintColor:(UIColor *)color atIndexInStack:(NSInteger )index;
+/** set barTint color in different controller,default effect all */
 - (void)pa_setBarTintColor:(UIColor *)color forViewControllerNamed:(NSString *)viewControllerName;
 
 /** use as bar tint color, effect the bar item */
 - (void)pa_setTintColor:(UIColor *)color;
+/** use as bar tint color, effect the bar item */
 - (void)pa_setTintColor:(UIColor *)color atIndexInStack:(NSInteger )index;
+/** use as bar tint color, effect the bar item */
 - (void)pa_setTintColor:(UIColor *)color forViewControllerNamed:(NSString *)viewControllerName;
 
 /** YES for show default bottom line of navigationBar, NO for don't */ 

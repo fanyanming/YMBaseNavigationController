@@ -30,7 +30,9 @@
     CGRect fromTo = CGRectMake(ScreenW, 0, ScreenW, ScreenH);
     CGRect toTo = CGRectMake(-ScreenW, 0, ScreenW, ScreenH);
     toVC.view.frame = toTo;
-    tabBar.frame = CGRectMake(-ScreenW, ScreenH - 49, ScreenW, 49);
+    if (fromVC.hidesBottomBarWhenPushed != toVC.hidesBottomBarWhenPushed) {
+        tabBar.frame = CGRectMake(-ScreenW, ScreenH - 49, ScreenW, 49);
+    }
 
     // Add target view to the container
     UIView *containerView = [transitionContext containerView];
@@ -42,7 +44,10 @@
     [UIView animateWithDuration:duration animations:^{
         fromVC.view.frame = fromTo;
         toVC.view.frame = CGRectMake(0, 0, ScreenW, ScreenH);
-        tabBar.frame = CGRectMake(0, ScreenH - 49, ScreenW, 49);
+        // 当底部tab bar隐藏状态不一样的时候才显示
+        if (fromVC.hidesBottomBarWhenPushed != toVC.hidesBottomBarWhenPushed) {
+            tabBar.frame = CGRectMake(0, ScreenH - 49, ScreenW, 49);
+        }
     } completion:^(BOOL finished) {
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }];

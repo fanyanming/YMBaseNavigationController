@@ -85,7 +85,6 @@
 
     PAWrapperNavigationController *wrapperNaviVC = [[PAWrapperNavigationController alloc] init];
     // 此处默认是不透明的,方便设置背景色
-
     wrapperNaviVC.navigationBar.translucent = NO;
     [wrapperNaviVC.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:(UIBarMetricsDefault)];
     
@@ -140,7 +139,7 @@
                 if ([barTintColorToDisplay isEqual:[UIColor clearColor]]) {
                     [wrapperNaviVC.navigationBar setShadowImage:[[UIImage alloc] init]];
                     wrapperNaviVC.navigationBar.translucent = YES;
-                }else {
+                }else if ([_viewControllersIsHideBottomlineDictionary objectForKey:stringKey] == NO){
                     [wrapperNaviVC.navigationBar setShadowImage:nil];
                     wrapperNaviVC.navigationBar.translucent = NO;
                 }
@@ -219,9 +218,10 @@
     wrapperVC.tabBarItem = viewController.tabBarItem;
     
     wrapperVC.hidesBottomBarWhenPushed = viewController.hidesBottomBarWhenPushed;
-    [super pushViewController:wrapperVC animated:YES];
-    
     // 因为每个控制都其实wrapperNavigationContoller的rootVC,所以,返回按钮都市不显示的
+    
+    [super pushViewController:wrapperVC animated:YES];
+
 #pragma mark - 为非根控制器添加返回按钮
     if (self.viewControllers.count > 1) {
         UIButton *backButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
